@@ -1,10 +1,16 @@
-import React,{Component} from "react";
+import React,{Component, Fragment} from "react";
 import ReactDOM from "react-dom"
+import Upload from "./upload/Upload";
+
+import {Provider} from "react-redux";
+import store from "../store";
 
 class App extends Component{
     render() {
         return(
-            <h1>Frontend React</h1>
+            <Provider store={store}>
+                <Upload/>
+            </Provider>
         )
     }
 }

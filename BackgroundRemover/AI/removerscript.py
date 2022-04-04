@@ -85,6 +85,7 @@ def image(image):
         im_rh = im_h
         im_rw = im_w
 
+
     im_rw = im_rw - im_rw % 32
     im_rh = im_rh - im_rh % 32
     im = F.interpolate(im, size=(im_rh, im_rw), mode='area')
