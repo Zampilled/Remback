@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-%(w(p$ru)id^xwmwv_mhq1cnbe*6bh0v45bmn61dur$+0az=*r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['zampilled.netsoc.ie', '127.0.0.1', '0.0.0.0','localhost']
+ALLOWED_HOSTS = ['zampilled.netsoc.ie', '127.0.0.1', '0.0.0.0', 'localhost']
 
 
 # Application definition
@@ -92,10 +92,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'BackgroundRemover',
-        'USER': 'postgres',
+        'USER': 'zam',
         'PASSWORD': 'zam',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'HOST': 'localhost',
+        'PORT': '',
 
     }
 }
