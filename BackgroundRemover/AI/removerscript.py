@@ -29,7 +29,7 @@ def remove_background(image, matte):
     return Image.fromarray(np.uint8(foreground))
 
 
-def image(image):
+def image(image, url):
     ref_size = 512
     BASE_DIR = Path(__file__).resolve().parent.parent
     ckpt_path = os.path.join(BASE_DIR,'AI/pretrained/modnet_photographic_portrait_matting.ckpt')
@@ -50,6 +50,7 @@ def image(image):
         weights = torch.load(ckpt_path)
     else:
         weights = torch.load(ckpt_path, map_location=torch.device('cpu'))
+
     modnet.load_state_dict(weights)
     modnet.eval()
 
@@ -88,9 +89,10 @@ def image(image):
 
     im_rw = im_rw - im_rw % 32
     im_rh = im_rh - im_rh % 32
-    im = F.interpolate(im, size=(im_rh, im_rw), mode='area')
+    im = F.interpolate(im, size=(im_rw, im_rh), mode='area')
 
     # inference
+
     _, _, matte = modnet(im.cuda() if torch.cuda.is_available() else im, True)
 
     # resize and save matte
@@ -105,4 +107,7 @@ def image(image):
     matte_path = os.path.join(image, matte_name)
     os.remove(matte_path)
     foreground.save(os.path.join(image, foreground_name))
-    return os.path.join(image, foreground_name)
+    os.remove(image)
+    newurl = url.split('.')[-2]
+    finurl = '/media/' + newurl + 'foreground.png'
+    return finurl

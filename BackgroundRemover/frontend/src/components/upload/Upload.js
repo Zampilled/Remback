@@ -8,7 +8,8 @@ import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 class Upload extends Component {
     state ={
         img: '',
-        imgUrl: ''
+        imgUrl: '',
+        Loading: false,
     }
     static propTypes = {
         image: PropTypes.array.isRequired,
@@ -29,7 +30,8 @@ class Upload extends Component {
         this.props.getImage(formdata)
         this.setState({
             img: '',
-            imgUrl: ''
+            imgUrl: '',
+            Loading: true,
         })
     }
     render() {
@@ -43,7 +45,14 @@ class Upload extends Component {
                     </div>
                     <div className="card-body text-center">
                         <div className="container-lg text-center media-middle card card-body border-warning d-flex align-content-center" >
-                            {this.props.image?<img className="rounded shadow " src={this.props.image}></img>: this.state.img?<img className="rounded shadow " src={this.state.imgUrl}></img>: <label className="label">No Image Uploaded</label>}
+                            {this.props.image?
+                                <img className="rounded shadow " src={this.props.image}></img>:
+                                this.state.img?
+                                        <img className="rounded shadow " src={this.state.imgUrl}></img>:
+                                    this.state.Loading?
+                                        <div className="text-center">
+                                        <div className="spinner-border" role="status"/></div>:
+                                        <label className="label">No Images Uploaded</label>}
                         </div>
 
                                 <input
@@ -56,11 +65,10 @@ class Upload extends Component {
                                     value={img}
                                 />
                     </div>
-                    <div className="card-footer text-center">
-
-                            <button type="submit" className="btn btn-warning btn-lg"  >{' '}Remove Background</button>
-
+                    <div className="card-footer text-center ">
+                        <button type="submit" className="btn btn-warning btn-lg align-top"  >{' '}Remove Background</button>
                     </div>
+
 
                 </div>
                 </form>

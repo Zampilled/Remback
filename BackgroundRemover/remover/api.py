@@ -16,7 +16,8 @@ class BackgroundRemoverAPI(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
         img = TheImages.objects.create(image=data['image'])
-        foreground = image(img.image.path)
+        foreground = image(img.image.path, img.image.name)
+        img.delete()
         return Response({
             'image': foreground
         })
