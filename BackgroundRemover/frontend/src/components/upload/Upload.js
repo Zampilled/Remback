@@ -67,7 +67,7 @@ class Upload extends Component {
                             {this.props.image?
                                 <img className="rounded shadow " width="100%" height="auto"  src={this.props.image}></img>:
                                 this.state.img?
-                                        <img className="rounded shadow " src={this.state.imgUrl}></img>:
+                                        <img className="rounded shadow " width="100%" height="auto" src={this.state.imgUrl}></img>:
                                     this.state.Empty?<div className="fw-bold">No Image Uploaded!</div>:
                                     this.state.Loading?
                                         <div className="text-center">
