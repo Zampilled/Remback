@@ -92,10 +92,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'BackgroundRemover',
-        'USER': 'zam',
+        'USER': 'postgres',
         'PASSWORD': 'zam',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
 
     }
 }

@@ -10,6 +10,7 @@ class Upload extends Component {
         img: '',
         imgUrl: '',
         Loading: false,
+        Empty: false
     }
     static propTypes = {
         image: PropTypes.array.isRequired,
@@ -25,20 +26,38 @@ class Upload extends Component {
     }
     onSubmit = e =>{
         e.preventDefault()
-        let formdata = new FormData()
-        formdata.append('image', this.state.img)
-        this.props.getImage(formdata)
+        if (this.state.img === ''){
+            this.setState({
+                Empty: true
+            })
+        }else {
+            let formdata = new FormData()
+            formdata.append('image', this.state.img)
+            this.props.getImage(formdata)
+            this.setState({
+                img: '',
+                imgUrl: '',
+                Loading: true,
+                Empty: false
+            })
+        }
+    }
+    onReset = e =>{
+        console.log("reset")
         this.setState({
             img: '',
             imgUrl: '',
-            Loading: true,
+            Loading: false,
+            Empty : false,
         })
+
+
     }
     render() {
         const{img} = this.state.img
         return (
             <div className="">
-                <form onSubmit={this.onSubmit}>
+                <form >
                 <div className="col-md-4 card m-auto shadow car border-danger mt-4">
                     <div className="card-header text-center ">
                         <h2>Background Remover</h2>
@@ -49,10 +68,11 @@ class Upload extends Component {
                                 <img className="rounded shadow " src={this.props.image}></img>:
                                 this.state.img?
                                         <img className="rounded shadow " src={this.state.imgUrl}></img>:
+                                    this.state.Empty?<div className="fw-bold">No Image Uploaded!</div>:
                                     this.state.Loading?
                                         <div className="text-center">
                                         <div className="spinner-border" role="status"/></div>:
-                                        <label className="label">No Images Uploaded</label>}
+                                        <label className="label">No Image Uploaded</label>}
                         </div>
 
                                 <input
@@ -66,11 +86,16 @@ class Upload extends Component {
                                 />
                     </div>
                     <div className="card-footer text-center ">
-                        <button type="submit" className="btn btn-warning btn-lg align-top"  >{' '}Remove Background</button>
-                    </div>
+                        {this.props.image ?
+                            <button onClick={this.onReset} className="btn btn-danger btn-lg">{' '}Reset</button>:
+                            <button onClick={this.onSubmit} className="btn btn-warning btn-lg">{' '}Remove Background</button>
+                        }
+
+                        </div>
 
 
                 </div>
+
                 </form>
             </div>
 

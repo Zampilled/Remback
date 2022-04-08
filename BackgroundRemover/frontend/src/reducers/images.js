@@ -1,4 +1,5 @@
 import {GET_IMAGE} from '../actions/types.js'
+import {RESET} from "../actions/types.js";
 
 const initialState = {
     image: ''
@@ -9,6 +10,10 @@ export default function (state=initialState, action){
         case GET_IMAGE:
             return{
                 image: action.payload.image
+            }
+        case RESET:
+            return {
+                image: ''
             }
         default:
             return state;
