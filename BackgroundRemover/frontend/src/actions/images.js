@@ -1,6 +1,5 @@
 import axios from "axios";
 import {GET_IMAGE} from "./types";
-import {RESET} from "./types";
 
 
 //GET_IMAGE
@@ -15,9 +14,3 @@ export const getImage = (image) => dispatch =>{
         }).catch(err=>console.log(err))
 }
 
-//RESET
-export const Reset = () => dispatch =>(
-    dispatch({
-        type: RESET
-    })
-)

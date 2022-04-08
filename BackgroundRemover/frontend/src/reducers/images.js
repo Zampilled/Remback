@@ -11,10 +11,6 @@ export default function (state=initialState, action){
             return{
                 image: action.payload.image
             }
-        case RESET:
-            return {
-                image: ''
-            }
         default:
             return state;
     }
